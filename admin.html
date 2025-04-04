@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin - ShoppingLinkCatalog</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>Admin Panel</h2>
+  <form id="catalogForm">
+    <input type="text" id="name" placeholder="Nama Katalog" required>
+    <input type="text" id="description" placeholder="Deskripsi" required>
+    <input type="text" id="image" placeholder="URL Gambar" required>
+    <input type="number" id="price" placeholder="Harga (Rp)" required>
+    <input type="number" id="discount" placeholder="Diskon (%)" required>
+    <input type="text" id="link" placeholder="Link Toko" required>
+    <button type="submit">Tambah Katalog</button>
+  </form>
+  <div id="adminCatalogList"></div>
+  <button id="logoutBtn">Logout</button>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>ShoppingLinkCatalog</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>Temukan Produk</h2>
+  <p id="loginIndicator" style="text-align: center; color: #666;"></p>
+  <div id="authButtons" style="text-align: center; margin-bottom: 20px;">
+    <a href="login.html" class="auth-btn login-btn">Login</a>
+    <a href="register.html" class="auth-btn register-btn">Daftar</a>
+  </div>
+  <div id="adminForm" style="display: none; text-align: center; margin-bottom: 20px;">
+    <h3>Tambah Katalog (Admin)</h3>
+    <form id="catalogForm">
+      <input type="text" id="name" placeholder="Nama Katalog" required>
+      <input type="text" id="description" placeholder="Deskripsi" required>
+      <input type="text" id="image" placeholder="URL Gambar" required>
+      <input type="number" id="price" placeholder="Harga (Rp)" required>
+      <input type="number" id="discount" placeholder="Diskon (%)" required>
+      <input type="text" id="link" placeholder="Link Toko" required>
+      <button type="submit">Tambah Katalog</button>
+    </form>
+  </div>
+  <div id="updateModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>Update Katalog</h3>
+      <form id="updateForm">
+        <input type="hidden" id="updateKey">
+        <input type="text" id="updateName" placeholder="Nama Katalog" required>
+        <input type="text" id="updateDescription" placeholder="Deskripsi" required>
+        <input type="text" id="updateImage" placeholder="URL Gambar" required>
+        <input type="number" id="updatePrice" placeholder="Harga (Rp)" required>
+        <input type="number" id="updateDiscount" placeholder="Diskon (%)" required>
+        <input type="text" id="updateLink" placeholder="Link Toko" required>
+        <button type="submit">Simpan Perubahan</button>
+      </form>
+    </div>
+  </div>
+  <div id="catalogList"></div>
+  <button id="logoutBtn" style="display:none;">Logout</button>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
