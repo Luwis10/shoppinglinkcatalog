@@ -6,13 +6,17 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h2>Register</h2>
-  <form id="registerForm">
-    <input type="email" id="email" placeholder="Email" required>
-    <input type="password" id="password" placeholder="Password" required>
-    <button type="submit">Register</button>
-  </form>
-  <p>Sudah punya akun? <a href="login.html">Login</a></p>
+  <div class="auth-container">
+    <h2>Sign Form</h2>
+    <form id="registerForm" class="auth-form">
+      <label for="email">Nama atau email</label>
+      <input type="email" id="email" required>
+      <label for="password">Kata sandi</label>
+      <input type="password" id="password" required>
+      <button type="submit">SUBMIT</button>
+    </form>
+    <p>Sudah memiliki akun silahkan <a href="login.html">login</a></p>
+  </div>
 
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>

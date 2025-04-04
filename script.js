@@ -1,5 +1,20 @@
 // script.js
 
+// Fungsi untuk membatasi jumlah kata pada deskripsi
+function limitWords(text, maxWords) {
+    const words = text.split(' ');
+    if (words.length > maxWords) {
+        return words.slice(0, maxWords).join(' ') + '...';
+    }
+    return text;
+}
+
+// Fungsi untuk menghitung harga asli sebelum diskon
+function calculateOriginalPrice(discountedPrice, discountPercentage) {
+    if (discountPercentage <= 0) return discountedPrice; // Jika tidak ada diskon, harga asli sama dengan harga setelah diskon
+    return Math.round(discountedPrice / (1 - (discountPercentage / 100)));
+}
+
 // Register
 document.getElementById('registerForm')?.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -114,17 +129,24 @@ function displayCatalogs(snapshot, containerId, isAdmin = false) {
       const key = childSnapshot.key;
       const div = document.createElement('div');
       div.className = 'catalog-item';
+      // Batasi deskripsi ke 20 kata
+      const limitedDescription = limitWords(data.description, 20);
+      // Hitung harga asli sebelum diskon
+      const originalPrice = calculateOriginalPrice(data.price, data.discount);
       div.innerHTML = `
         <img src="${data.image}" alt="${data.name}" onerror="this.src='https://via.placeholder.com/150';">
         <h3>${data.name}</h3>
-        <p>${data.description}</p>
-        <p class="price">Rp ${data.price.toLocaleString()}</p>
+        <p class="description">${limitedDescription}</p>
+        <p class="original-price">Rp ${originalPrice.toLocaleString()}</p>
         <p class="discount">-${data.discount}%</p>
-        ${auth.currentUser ? (auth.currentUser.email === 'luwiswiryanto@gmail.com' ? `
-          <button onclick="showUpdateForm('${key}', '${data.name}', '${data.description}', '${data.image}', ${data.price}, ${data.discount}, '${data.link}')">Update</button>
-          <button onclick="deleteCatalog('${key}')">Hapus</button>
-          <a href="${data.link}" target="_blank" class="buy-btn">Pesan Sekarang</a>
-        ` : `<a href="${data.link}" target="_blank" class="buy-btn">Pesan Sekarang</a>`) : '<p>Login untuk membeli</p>'}
+        <p class="price">Rp ${data.price.toLocaleString()}</p>
+        <div class="button-group">
+          ${auth.currentUser ? (auth.currentUser.email === 'luwiswiryanto@gmail.com' ? `
+            <button onclick="showUpdateForm('${key}', '${data.name}', '${data.description}', '${data.image}', ${data.price}, ${data.discount}, '${data.link}')">Update</button>
+            <button onclick="deleteCatalog('${key}')">Hapus</button>
+            <a href="${data.link}" target="_blank" class="buy-btn">Pesan Sekarang</a>
+          ` : `<a href="${data.link}" target="_blank" class="buy-btn">Pesan Sekarang</a>`) : '<p>Login untuk membeli</p>'}
+        </div>
       `;
       container.appendChild(div);
     });
